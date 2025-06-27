@@ -1,8 +1,14 @@
 function initMeta() {
+  const wrapper = document.getElementById("meta_block");
+  if (!wrapper) return;
+
   const FIRMWARE_URL = "/dfu-updater/meta-firmware";
-  const select = document.getElementById("firmwareSelector");
-  const readme = document.getElementById("readme");
-  const programBtn = document.getElementById("download");
+  const select = wrapper.querySelector("#firmwareSelector");
+  const readme = wrapper.querySelector("#readme");
+  const fileInput = wrapper.querySelector("#fileInput");
+  const fileDisplay = wrapper.querySelector("#fileDisplay");
+  const programBtn = wrapper.querySelector("#download");
+
   let firmwareList = [];
 
   function waitForDownloadButton(callback) {
@@ -96,3 +102,5 @@ function initMeta() {
     reader.readAsArrayBuffer(file);
   });
 }
+
+initMeta();

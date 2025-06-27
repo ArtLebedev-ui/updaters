@@ -1,12 +1,18 @@
 function initCoral() {
+  const wrapper = document.getElementById("coral_block");
+  if (!wrapper) return;
+
   const FIRMWARE_URL = "/dfu-updater/coral-firmware";
-  const select = document.getElementById("firmwareSelector");
-  const readme = document.getElementById("readme");
+  const select = wrapper.querySelector("#firmwareSelector");
+  const readme = wrapper.querySelector("#readme");
+  const fileInput = wrapper.querySelector("#fileInput");
+  const fileDisplay = wrapper.querySelector("#fileDisplay");
+  const programBtn = wrapper.querySelector("#download");
+
   let firmwareList = [];
 
   function waitForDownloadButton(callback) {
     const checkInterval = setInterval(() => {
-      const programBtn = document.getElementById("download");
       if (programBtn) {
         clearInterval(checkInterval);
         callback(programBtn);
@@ -78,7 +84,6 @@ function initCoral() {
     });
   }
 
-  const programBtn = document.getElementById("download");
   fileInput.addEventListener("change", (event) => {
     const file = event.target.files[0];
     if (!file || !file.name.endsWith(".bin")) {
@@ -99,3 +104,5 @@ function initCoral() {
     reader.readAsArrayBuffer(file);
   });
 }
+
+initCoral();
